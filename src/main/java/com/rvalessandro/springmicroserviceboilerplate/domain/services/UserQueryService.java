@@ -5,14 +5,15 @@ import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.Us
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
-public class UserService implements IUserService {
+public class UserQueryService implements IUserQueryService {
     private UserRepositoryAdapter userRepositoryAdapter;
 
     @Override
-    public void createUser(User user) {
-        // Do Logic Here
-        userRepositoryAdapter.createUser(user);
+    public List<User> findUsers(User user) {
+        return userRepositoryAdapter.findAllUsers();
     }
 }

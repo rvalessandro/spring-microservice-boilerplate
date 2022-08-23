@@ -3,14 +3,14 @@ package com.rvalessandro.springmicroserviceboilerplate.domain.adapters;
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.CreateUserDTO;
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.User;
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.vo.Name;
-import com.rvalessandro.springmicroserviceboilerplate.domain.services.IUserService;
+import com.rvalessandro.springmicroserviceboilerplate.domain.services.IUserCommandService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @AllArgsConstructor
 @Configuration
 public class UserServiceAdapter {
-    private IUserService userService;
+    private IUserCommandService userService;
 
     public void createUser(CreateUserDTO dto) throws Exception {
         // TODO Use Model mapper
