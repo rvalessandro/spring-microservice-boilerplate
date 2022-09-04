@@ -13,7 +13,6 @@ public class UserServiceAdapter {
     private IUserCommandService userService;
 
     public void createUser(CreateUserDTO dto) throws Exception {
-        // TODO Use Model mapper
         Name name = new Name(dto.getName());
         User user = new User(name);
 
