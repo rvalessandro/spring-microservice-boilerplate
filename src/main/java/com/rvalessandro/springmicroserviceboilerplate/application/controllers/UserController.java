@@ -31,12 +31,16 @@ public class UserController {
     private GetUserByIDDTO getUser(@PathVariable String userId) {
         ThreadContext.put("User ID", userId);
         logger.info("Fetching user by id");
+        ThreadContext.clearAll();
         return userRepositoryAdapter.getUserByID(userId);
     }
 
     @PostMapping
-    private void createUser(@RequestBody CreateUserDTO createUserDTO) throws Exception {
-        userServiceAdapter.createUser(createUserDTO);
-        // TODO Map to Response DTO and return value
+    private void createUser(@RequestBody CreateUserDTO createUserDTO) {
+        try {
+            userServiceAdapter.createUser(createUserDTO); // TODO Map to Response DTO and return value
+        } catch (Exception e) {
+            logger.error("Unable to create user", e);
+        }
     }
 }
