@@ -4,6 +4,7 @@ import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dt
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.GetUserByIDDTO;
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.GetUsersDTO;
 import com.rvalessandro.springmicroserviceboilerplate.domain.adapters.UserControllerAdapter;
+import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserControllerRepositoryAdapter;
 import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserServiceRepositoryAdapter;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -18,12 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
     private UserControllerAdapter userControllerAdapter;
-    private UserServiceRepositoryAdapter userRepositoryAdapter;
+    private UserControllerRepositoryAdapter userControllerRepositoryAdapter;
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @GetMapping
     private List<GetUsersDTO> getUsers() {
-        return userRepositoryAdapter.findAllUsers();
+        return userControllerRepositoryAdapter.findAllUsers();
     }
 
     @GetMapping("/{userId}")
@@ -31,7 +32,7 @@ public class UserController {
         ThreadContext.put("User ID", userId);
         logger.info("Fetching user by id");
         ThreadContext.clearAll();
-        return userRepositoryAdapter.getUserByID(userId);
+        return userControllerRepositoryAdapter.getUserByID(userId);
     }
 
     @PostMapping

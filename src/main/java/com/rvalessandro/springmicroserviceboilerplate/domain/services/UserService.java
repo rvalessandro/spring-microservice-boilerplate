@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UserService implements IUserService {
-    private UserServiceRepositoryAdapter userRepositoryAdapter;
+    private UserServiceRepositoryAdapter userServiceRepositoryAdapter;
 
     @Override
     public void createUser(User user) {
         // Do Logic Here
-        userRepositoryAdapter.createUser(user);
+        userServiceRepositoryAdapter.createUser(user);
     }
 }

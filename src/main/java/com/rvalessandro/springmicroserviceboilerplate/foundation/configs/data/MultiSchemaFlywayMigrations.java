@@ -10,6 +10,14 @@ public class MultiSchemaFlywayMigrations implements FlywayMigrationStrategy {
     @Override
     public void migrate(Flyway flyway) {
         var dataSource = flyway.getConfiguration().getDataSource();
+
+        // TODO Remove after testing
+        Flyway.configure()
+                .schemas("public")
+                .locations("db/migration")
+                .dataSource(dataSource).load()
+                .migrate();
+
         for(TenantsEnum tenant : TenantsEnum.values()) {
             Flyway.configure()
                     .schemas(tenant.name())
