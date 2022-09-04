@@ -10,7 +10,7 @@ import lombok.Getter;
 public class User {
     private Name name;
 
-    public User(UserEntity user) throws Exception {
+    public User(UserEntity user) {
         this.name = new Name(user.getName());
     }
 }

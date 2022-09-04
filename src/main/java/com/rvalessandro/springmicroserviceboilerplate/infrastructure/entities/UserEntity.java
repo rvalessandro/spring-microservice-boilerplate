@@ -8,9 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "users")
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class UserEntity {
