@@ -1,14 +1,14 @@
 package com.rvalessandro.springmicroserviceboilerplate.domain.services;
 
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.User;
-import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserRepositoryAdapter;
+import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserServiceRepositoryAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserCommandService implements IUserCommandService {
-    private UserRepositoryAdapter userRepositoryAdapter;
+public class UserService implements IUserService {
+    private UserServiceRepositoryAdapter userRepositoryAdapter;
 
     @Override
     public void createUser(User user) {

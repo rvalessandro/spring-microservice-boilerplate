@@ -1,11 +1,10 @@
 package com.rvalessandro.springmicroserviceboilerplate.application.controllers;
 
-import com.rvalessandro.springmicroserviceboilerplate.SpringMicroserviceBoilerplateApplication;
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.CreateUserDTO;
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.GetUserByIDDTO;
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.GetUsersDTO;
-import com.rvalessandro.springmicroserviceboilerplate.domain.adapters.UserServiceAdapter;
-import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserRepositoryAdapter;
+import com.rvalessandro.springmicroserviceboilerplate.domain.adapters.UserControllerAdapter;
+import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserServiceRepositoryAdapter;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,17 +17,17 @@ import java.util.List;
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
-    private UserServiceAdapter userServiceAdapter;
-    private UserRepositoryAdapter userRepositoryAdapter;
+    private UserControllerAdapter userControllerAdapter;
+    private UserServiceRepositoryAdapter userRepositoryAdapter;
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @GetMapping
-    private List<GetUsersDTO> getUser() {
+    private List<GetUsersDTO> getUsers() {
         return userRepositoryAdapter.findAllUsers();
     }
 
     @GetMapping("/{userId}")
-    private GetUserByIDDTO getUser(@PathVariable String userId) {
+    private GetUserByIDDTO getUserById(@PathVariable String userId) {
         ThreadContext.put("User ID", userId);
         logger.info("Fetching user by id");
         ThreadContext.clearAll();
@@ -38,7 +37,7 @@ public class UserController {
     @PostMapping
     private void createUser(@RequestBody CreateUserDTO createUserDTO) {
         try {
-            userServiceAdapter.createUser(createUserDTO); // TODO Map to Response DTO and return value
+            userControllerAdapter.createUser(createUserDTO); // TODO Map to Response DTO and return value
         } catch (Exception e) {
             logger.error("Unable to create user", e);
         }

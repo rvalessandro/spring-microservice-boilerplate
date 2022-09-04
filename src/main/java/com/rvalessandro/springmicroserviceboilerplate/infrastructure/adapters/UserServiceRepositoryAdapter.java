@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @AllArgsConstructor
-public class UserRepositoryAdapter {
+public class UserServiceRepositoryAdapter { // TODO Add Interface
     UserRepository userRepository;
     ModelMapper modelMapper;
 

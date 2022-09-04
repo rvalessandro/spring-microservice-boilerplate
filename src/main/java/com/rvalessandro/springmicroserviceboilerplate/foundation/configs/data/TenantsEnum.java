@@ -1,6 +1,6 @@
 package com.rvalessandro.springmicroserviceboilerplate.foundation.configs.data;
 
-// TODO Move to Env
+// Use lowercase since PostgreSQL only supports lowercase for tenant naming
 public enum TenantsEnum {
     tenant_1,
     tenant_2,
