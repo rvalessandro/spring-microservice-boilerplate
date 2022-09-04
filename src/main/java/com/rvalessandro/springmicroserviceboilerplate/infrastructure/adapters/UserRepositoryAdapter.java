@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserRepositoryAdapter {
     UserRepository userRepository;
+    ModelMapper modelMapper;
 
     public List<GetUsersDTO> findAllUsers() {
-        ModelMapper modelMapper = new ModelMapper(); // TODO Make Global
         return userRepository.findAll()
                 .stream()
                 .map(user -> modelMapper.map(user, GetUsersDTO.class))
@@ -27,7 +27,6 @@ public class UserRepositoryAdapter {
     }
 
     public GetUserByIDDTO getUserByID(String id) {
-        ModelMapper modelMapper = new ModelMapper(); // TODO Make Global
         return modelMapper.map(userRepository.findById(UUID.fromString(id)), GetUserByIDDTO.class);
     }
 
