@@ -17,7 +17,7 @@ services:
       - '5432:5432'
 
   zookeeper:
-    image: zookeeper:3.7.0
+    image: wurstmeister/zookeeper
     container_name: zookeeper
     restart: "no"
     networks:
@@ -26,7 +26,7 @@ services:
       - "2181:2181"
 
   kafka:
-    image: obsidiandynamics/kafka
+    image: wurstmeister/kafka
     container_name: kafka
     restart: "no"
     networks:
@@ -36,7 +36,7 @@ services:
     environment:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
-      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://localhost:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       KAFKA_BROKER_ID: 1
@@ -44,15 +44,16 @@ services:
     depends_on:
       - zookeeper
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    container_name: kafdrop
-    restart: "no"
-    networks:
-      - kafka-net
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-    depends_on:
-      - "kafka"
+# TODO: need to be remove because unused
+#  kafdrop:
+#    image: obsidiandynamics/kafdrop
+#    container_name: kafdrop
+#    restart: "no"
+#    networks:
+#      - kafka-net
+#    ports:
+#      - "9000:9000"
+#    environment:
+#      KAFKA_BROKERCONNECT: "kafka:29092"
+#    depends_on:
+#      - "kafka"
