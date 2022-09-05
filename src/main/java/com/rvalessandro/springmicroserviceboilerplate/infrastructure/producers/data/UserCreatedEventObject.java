@@ -1,11 +1,11 @@
 package com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers.data;
 
-import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.EventNameConstant;
+import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.EventNameConstants;
 
 public class UserCreatedEventObject extends EventObject {
     public UserCreatedEventObject(Object payload) {
-        this.eventName = EventNameConstant.userCreated;
-        this.context = "";
+        this.eventName = EventNameConstants.USERCREATED;
+        this.context = new Context();
         this.payload = payload;
     }
 }

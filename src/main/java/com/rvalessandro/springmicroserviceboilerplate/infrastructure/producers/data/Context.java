@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class EventObject {
-    public String eventName;
-    public Context context;
-    public Object payload;
+public class Context {
+    public String tenantId;
 }

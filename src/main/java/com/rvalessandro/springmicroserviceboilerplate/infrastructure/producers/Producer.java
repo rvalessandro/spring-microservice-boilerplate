@@ -1,7 +1,7 @@
 package com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.TopicConstant;
+import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.TopicConstants;
 import com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers.data.EventObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,9 +25,9 @@ public class Producer implements IProducer {
     public boolean publish(EventObject object) throws Exception {
         String message = objectMapper.writeValueAsString(object);
 
-        kafkaTemplate.send(TopicConstant.user, message);
+        kafkaTemplate.send(TopicConstants.USER, message);
 
-        logger.info("Success Publish Topic: {} with value {}", TopicConstant.user, message);
+        logger.info("Success Publish Topic: {} with value {}", TopicConstants.USER, message);
 
         return true;
     }

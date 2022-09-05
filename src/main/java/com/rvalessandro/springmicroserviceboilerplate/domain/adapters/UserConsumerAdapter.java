@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.User;
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.vo.Name;
 import com.rvalessandro.springmicroserviceboilerplate.domain.services.IUserService;
-import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.EventNameConstant;
+import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.constant.EventNameConstants;
 import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.context.annotation.Configuration;
@@ -23,9 +23,9 @@ public class UserConsumerAdapter {
         String userName = node.get("payload").get("name").get("value").asText();
 
         switch (eventName) {
-            case EventNameConstant.userCreated:
+            case EventNameConstants.USERCREATED:
                 User user = new User(new Name(userName));
-                userService.createUserByKafka(user);
+                userService.createUser(user);
                 break;
         }
     }
