@@ -1,23 +1,17 @@
 package com.rvalessandro.springmicroserviceboilerplate.foundation.configs.kafka;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rvalessandro.springmicroserviceboilerplate.domain.models.User;
-import com.rvalessandro.springmicroserviceboilerplate.domain.models.vo.Name;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
-public class Producer {
-    @Value("${topic.name}")
-    private String orderTopic;
-
+public class Producer implements IProducer {
     private final ObjectMapper objectMapper;
     private final KafkaTemplate<String, String> kafkaTemplate;
+    private static final Logger logger = LogManager.getLogger(Producer.class);
 
     @Autowired
     public Producer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
@@ -25,13 +19,14 @@ public class Producer {
         this.objectMapper = objectMapper;
     }
 
-    // TODO: need to be modify
-    public String sendMessage(User user) throws Exception {
-        String message = objectMapper.writeValueAsString(user);
-        kafkaTemplate.send(orderTopic, message);
+    @Override
+    public boolean publish(String topic, Object object) throws Exception {
+        String message = objectMapper.writeValueAsString(object);
 
-        log.info("Publish Successfully: {}", message);
+        kafkaTemplate.send("user", message);
 
-        return "message sent";
+        logger.info("Success Publish Topic: {} with value {}", "user", message);
+
+        return true;
     }
 }

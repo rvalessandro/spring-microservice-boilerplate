@@ -2,6 +2,7 @@ package com.rvalessandro.springmicroserviceboilerplate.foundation.configs.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +15,13 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConsumerConfig {
-    final KafkaProperties kafkaProperties;
+    private final KafkaProperties kafkaProperties;
 
+    @Autowired
     public KafkaConsumerConfig(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
     }
 
-    @Bean
     public Map<String, Object> consumerConfiguration() {
         Map<String, Object> properties = new HashMap<>(kafkaProperties.buildConsumerProperties());
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
