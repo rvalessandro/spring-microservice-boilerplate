@@ -5,7 +5,6 @@ import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dt
 import com.rvalessandro.springmicroserviceboilerplate.application.controllers.dto.GetUsersDTO;
 import com.rvalessandro.springmicroserviceboilerplate.domain.adapters.UserControllerAdapter;
 import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserControllerRepositoryAdapter;
-import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserServiceRepositoryAdapter;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
