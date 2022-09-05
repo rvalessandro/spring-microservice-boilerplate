@@ -43,17 +43,3 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
-
-# TODO: need to be remove because unused
-#  kafdrop:
-#    image: obsidiandynamics/kafdrop
-#    container_name: kafdrop
-#    restart: "no"
-#    networks:
-#      - kafka-net
-#    ports:
-#      - "9000:9000"
-#    environment:
-#      KAFKA_BROKERCONNECT: "kafka:29092"
-#    depends_on:
-#      - "kafka"

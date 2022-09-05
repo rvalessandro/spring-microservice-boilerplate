@@ -1,7 +1,7 @@
 package com.rvalessandro.springmicroserviceboilerplate.domain.services;
 
 import com.rvalessandro.springmicroserviceboilerplate.domain.models.User;
-import com.rvalessandro.springmicroserviceboilerplate.foundation.configs.kafka.IProducer;
+import com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers.IProducer;
 import com.rvalessandro.springmicroserviceboilerplate.infrastructure.adapters.UserServiceRepositoryAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,6 @@ public class UserService implements IUserService {
 
     @Override
     public void publishCreateUser(User user) throws Exception {
-        producer.publish("user", user);
+        producer.publish("USER_CREATED", user);
     }
 }

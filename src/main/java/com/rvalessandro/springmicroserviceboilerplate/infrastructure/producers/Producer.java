@@ -1,4 +1,4 @@
-package com.rvalessandro.springmicroserviceboilerplate.foundation.configs.kafka;
+package com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Producer implements IProducer {
+    private final String topicName = "user";
     private final ObjectMapper objectMapper;
     private final KafkaTemplate<String, String> kafkaTemplate;
     private static final Logger logger = LogManager.getLogger(Producer.class);
@@ -20,12 +21,14 @@ public class Producer implements IProducer {
     }
 
     @Override
-    public boolean publish(String topic, Object object) throws Exception {
+    public boolean publish(String eventName, Object payload) throws Exception {
+        EventObject object = new EventObject(eventName, "", payload);
+
         String message = objectMapper.writeValueAsString(object);
 
-        kafkaTemplate.send("user", message);
+        kafkaTemplate.send(topicName, message);
 
-        logger.info("Success Publish Topic: {} with value {}", "user", message);
+        logger.info("Success Publish Topic: {} with value {}", topicName, message);
 
         return true;
     }
