@@ -42,13 +42,4 @@ public class UserController {
             logger.error("Unable to create user", e);
         }
     }
-
-    @PostMapping("/publish")
-    private void publishCreateUser(@RequestBody CreateUserDTO createUserDTO) {
-        try {
-            userControllerAdapter.publishCreateUser(createUserDTO);
-        } catch (Exception e) {
-            logger.error("Unable to publish user", e);
-        }
-    }
 }

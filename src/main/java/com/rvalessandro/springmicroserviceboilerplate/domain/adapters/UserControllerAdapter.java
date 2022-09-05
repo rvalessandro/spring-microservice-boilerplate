@@ -19,11 +19,4 @@ public class UserControllerAdapter {
         userService.createUser(user);
     }
 
-    public void publishCreateUser(CreateUserDTO dto) throws Exception {
-        Name name = new Name(dto.getName());
-        User user = new User(name);
-
-        userService.publishCreateUser(user);
-    }
-
 }

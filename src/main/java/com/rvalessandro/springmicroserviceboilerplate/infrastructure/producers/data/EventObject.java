@@ -1,4 +1,4 @@
-package com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers;
+package com.rvalessandro.springmicroserviceboilerplate.infrastructure.producers.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EventObject {
-    private String eventName;
-    private String context;
-    private Object payload;
+    public String eventName;
+    public String context;
+    public Object payload;
 }
