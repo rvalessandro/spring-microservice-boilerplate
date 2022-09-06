@@ -18,10 +18,10 @@ public class UserConsumer {
     @KafkaListener(topics = TopicConstants.USER)
     public void listener(ConsumerRecord<String, String> cr) {
         try {
-            logger.info("Success Consume topic: {} with value {}", cr.topic(), cr.value());
+            logger.info("Success Consume topic: {} with event name {}", cr.topic(), cr.key());
             userConsumerAdapter.createUser(cr);
         } catch (Exception e) {
-            logger.error("Unable to consume", e);
+            logger.error("Unable to Consume topic: {} with event name {}", cr.topic(), cr.key(), e);
         }
     }
 }

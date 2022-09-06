@@ -25,7 +25,7 @@ public class Producer implements IProducer {
     public boolean publish(EventObject object) throws Exception {
         String message = objectMapper.writeValueAsString(object);
 
-        kafkaTemplate.send(TopicConstants.USER, message);
+        kafkaTemplate.send(TopicConstants.USER, object.getEventName(), message);
 
         logger.info("Success Publish Topic: {} with value {}", TopicConstants.USER, message);
 
